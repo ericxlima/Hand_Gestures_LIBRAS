@@ -3,27 +3,27 @@ import mediapipe as mp
 import cv2
 
 
-#  Inicialize utilities
+#  Utilities for Hands and Draw
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 
-#  Capture Video in Webcam, and capture Hands
-cam = cv2.VideoCapture(0)
+#  Capture Video in Webcam
+webcam = cv2.VideoCapture(0)
 
 #  Hands Processor
 with mp_hands.Hands(max_num_hands=1,
                     min_detection_confidence=0.8, 
                     min_tracking_confidence=0.5) as hands:
     
-    while cam.isOpened():
+    while webcam.isOpened():
         
-        #  Return and frame of the capture in screen 
-        success, frame = cam.read()
+        #  Response and Frame of the Webcam 
+        success, frame = webcam.read()
 
-        #  If return not is success
         if not success:
             print("Ignoring empty camera frame.")
             break
+
 
         #  Flipping the image horizontally and show
         image = cv2.flip(frame, 1)
@@ -46,18 +46,20 @@ with mp_hands.Hands(max_num_hands=1,
         if key == ord('q'):
             break
         
-        #  Rendering Results
+        #  Rendering Results in Screen
         if results.multi_hand_landmarks:
-            for _, hand in enumerate(results.multi_hand_landmarks):
+            for hand in results.multi_hand_landmarks:
                 mp_drawing.draw_landmarks(image, hand, mp_hands.HAND_CONNECTIONS)
         
-        #  Capture Results
+        #  Other operations, capturing the current moment
         if key == ord(' '):
-            print("Captured Results")
-            
+
             #  Pause Video
             cv2.waitKey(-1)
+            
+            #  Captured Hands
             cap_hands = results.multi_hand_landmarks
+            
             if cap_hands:
                 """ We will use only this five dots for mapping
                 0  - WRIST                  |  8  - MIDDLE_FINGER_TIP
@@ -74,14 +76,14 @@ with mp_hands.Hands(max_num_hands=1,
                 landmarks['MIDDLE_FINGER_TIP'] = cap_hands[0].landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP]
                 landmarks['PINKY_TIP'] = cap_hands[0].landmark[mp_hands.HandLandmark.PINKY_TIP]
 
-                #  landmarks = { key: (axis_x, axis_y) }
+                #  Remove axis-z and transforme landmarks to { landmark_name: (axis_x, axis_y) }
                 image_height, image_width, _ = image.shape
                 landmarks = { k: (v.x * image_width, v.y * image_height) for k, v in landmarks.items() }
                 
-                #  Add training examples
+                #  Add training examples  #  To Do
                 store_numbers = None
 
-                #  Recognize numbers
+                #  Recognize numbers  #  To Do
                 classify_numbers = None
 
                 #  To Debug
@@ -94,5 +96,5 @@ with mp_hands.Hands(max_num_hands=1,
         cv2.imshow('Hand Gestures LIBRAS', image)
 
 
-cam.release()
+webcam.release()
 cv2.destroyAllWindows()
