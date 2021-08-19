@@ -19,6 +19,7 @@ with mp_hands.Hands(max_num_hands=1,
         
         #  Response and Frame of the Webcam 
         success, frame = webcam.read()
+        HEIGHT, WIDTH, _ = frame.shape
 
         if not success:
             print("Ignoring empty camera frame.")
@@ -47,9 +48,24 @@ with mp_hands.Hands(max_num_hands=1,
             break
         
         #  Rendering Results in Screen
+        indexes = [0, 4, 5, 12, 20]
         if results.multi_hand_landmarks:
             for hand in results.multi_hand_landmarks:
-                mp_drawing.draw_landmarks(image, hand, mp_hands.HAND_CONNECTIONS)
+                mp_drawing.draw_landmarks(image=image,
+                                          landmark_list=hand,
+                                          connections=mp_hands.HAND_CONNECTIONS, 
+                                          landmark_drawing_spec=mp_drawing.DrawingSpec(color=(255, 1, 255),
+                                                                                       thickness=4,
+                                                                                       circle_radius=4),
+                                          connection_drawing_spec=mp_drawing.DrawingSpec(color=(15, 219, 19),
+                                                                                         thickness=4,
+                                                                                         circle_radius=2))
+                
+                #  Coloring the priciple indexes
+                for (i, landmark) in enumerate(hand.landmark):
+                    if i in indexes:
+                        x, y = int(landmark.x * WIDTH), int(landmark.y * HEIGHT)
+                        cv2.circle(image, (x, y), 5, (1, 12, 255), 6)
         
         #  Other operations, capturing the current moment
         if key == ord(' '):
@@ -62,7 +78,7 @@ with mp_hands.Hands(max_num_hands=1,
             
             if cap_hands:
                 """ We will use only this five dots for mapping
-                0  - WRIST                  |  8  - MIDDLE_FINGER_TIP
+                0  - WRIST                  |  12  - MIDDLE_FINGER_TIP
                 4  - THUMB_TIP              |  20 - PINKY_TIP
                 5  - INDEX_FINGER_MCP
                 For add more landmarks, see the MediaPipe documentation
@@ -77,8 +93,7 @@ with mp_hands.Hands(max_num_hands=1,
                 landmarks['PINKY_TIP'] = cap_hands[0].landmark[mp_hands.HandLandmark.PINKY_TIP]
 
                 #  Remove axis-z and transforme landmarks to { landmark_name: (axis_x, axis_y) }
-                image_height, image_width, _ = image.shape
-                landmarks = { k: (v.x * image_width, v.y * image_height) for k, v in landmarks.items() }
+                landmarks = { k: (v.x * WIDTH, v.y * HEIGHT) for k, v in landmarks.items() }
                 
                 #  Add training examples  #  To Do
                 store_numbers = None
