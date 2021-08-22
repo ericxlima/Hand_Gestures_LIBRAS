@@ -111,14 +111,31 @@ with mp_hands.Hands(max_num_hands=1,
                 #  Remove axis-z and transforme landmarks to { landmark_name: (axis_x, axis_y) }
                 landmarks = { k: (v.x * WIDTH, v.y * HEIGHT) for k, v in landmarks.items() }
                 
-                #  Recognize numbers  # 
-                classify_numbers = classify(landmarks)
-                print(classify_numbers)
 
-                #  Add training examples  #
-                store_numbers = None
+                #----------------------------#
+                #   Requests for ML 4 Kids   #
+                #----------------------------#
+                result_request = 'Abracadabra'
+
+                #  Classify
+                if key in [ord('C'), ord('c')]:
+                    result_request = classify(landmarks)
+
+                #  Add in Train Database 
+                if key in [ord('A'), ord('a')]:
+                    result_request = train(landmarks, 'A')
+                if key in [ord('E'), ord('e')]:
+                    result_request = train(landmarks, 'E')
+                if key in [ord('I'), ord('i')]:
+                    result_request = train(landmarks, 'I')
+                if key in [ord('O'), ord('o')]:
+                    result_request = train(landmarks, 'O')
+                if key in [ord('U'), ord('u')]:
+                    result_request = train(landmarks, 'U')
      
+                print(result_request)
                 sleep(3)
+                
 
         #  Show in the Screen
         cv2.imshow('Hand Gestures LIBRAS', image)
