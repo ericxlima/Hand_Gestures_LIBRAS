@@ -15,7 +15,7 @@
 \vspace{10pt}
 \begin{figure}[!ht]
 \centering
-\includegraphics[scale=0.2]{logo.png}
+\includegraphics[scale=0.2]{img/logo_university.png}
 \end{figure}
 
 
@@ -76,7 +76,7 @@ With that, we decided to develop an application that uses Machine Learning capab
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[scale=0.2]{gestures.png}
+\includegraphics[scale=0.2]{img/inclusion.png}
 \caption{Inclusion and accessibility of hearing impaired [X]}
 \label{figure_1}
 \end{figure}
@@ -97,7 +97,7 @@ For this experiment, the programming language Python [X] was used together with 
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[scale=0.9]{tools.png}
+\includegraphics[scale=0.9]{img/tools.png}
 \caption{Tools used in this project}
 \label{figure_2}
 \end{figure}
@@ -119,7 +119,7 @@ Initially, it was studied how the recognition of a hand by the computer works. W
  
 \begin{figure}[!ht]
 \centering
-\includegraphics[scale=0.4]{hands_vertices.png}
+\includegraphics[scale=0.4]{img/hand_vertices.png}
 \caption{Hand with different amount of vertices}
 \label{figure_3}
 \end{figure}
@@ -129,12 +129,12 @@ Also, it was decided to judge only the vowels and not the entire alphabet in LIB
  
  \begin{figure}[!ht]
 \centering
-\includegraphics[scale=0.3]{hands_LIBRAS.png}
+\includegraphics[scale=0.3]{img/hands_gestures.png}
 \caption{Vowels in LIBRAS with main vertices}
 \label{figure_4}
 \end{figure}
  
-Following the vertex naming adopted by Mediapipe, the chosen vertices were: 0-wrist, 4-thumb-tip, 5-index-finger-mcp, 8-middle-finger-tip and 20-pinky-tip. With that, the elaboration of the project code was started, and it was divided into 3 parts:
+Following the vertex naming adopted by Mediapipe, the chosen vertices were: 0-wrist, 4-thumb-tip, 5-index-finger-mcp, 12-middle-finger-tip and 20-pinky-tip. With that, the elaboration of the project code was started, and it was divided into 3 parts:
 
 
 
@@ -149,7 +149,7 @@ Finally, it was possible to collect, through keys pressed on the keyboard, the x
 
  \begin{figure}[!ht]
 \centering
-\includegraphics[scale=0.5]{data_collect.png}
+\includegraphics[scale=0.5]{img/data_collect.png}
 \caption{Collecting Data}
 \label{figure_6}
 \end{figure}
@@ -165,42 +165,66 @@ To communicate with Machine Learning for Kids, we use its API, in which it is po
 
  \begin{figure}[!ht]
 \centering
-\includegraphics[scale=0.5]{api_diagram.png}
+\includegraphics[scale=0.5]{img/api_diagram.png}
 \caption{API Diagram}
 \label{figure_5}
 \end{figure}
 
+%  https://docs.python-requests.org/en/master/
 
 
 
 
 \subsection{Training the IA:}
-All computer training is conducted entirely in Machine Learning through Watson, which uses Convolutional Neural Network models and linear regressions.
+All computer training is performed by Watson [X], who uses Convolutional Neural Network and linear regression models for classification. Thus, 40 gestures were added for each vowel, made by different people, with right and left hands and on different webcams, to generate greater precision in the results.
 
+%  Show some images for this
 
-
-
-%  https://docs.python-requests.org/en/master/
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
 \section{Results Analysis}
 
+After training, some tests were performed for each gesture and the following accuracy results were obtained:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{ |c|c|c| } 
+    \hline
+    \multicolumn{3}{|c|}{Results Analysis - 08/22/2021} \\
+    \hline
+    Gesture & Number of Tests & Accuracy Average \\
+    \hline
+    A & X & X\% \\ 
+    \hline
+    E & X & X\% \\
+    \hline
+    I & X & X\% \\
+    \hline
+    O & X & X\% \\
+    \hline
+    U & X & X\% \\
+    \hline
+    \end{tabular}
+    \caption{Results Analysis}
+    \label{tab:results_analysis}
+\end{table}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
 
-
+...
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
+
 \section{References}
 
-[1] ...
+...
 
-[2] ...
+%[1] ...
+
+%[2] ...
 
 \end{document}
