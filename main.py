@@ -52,10 +52,10 @@ with mp_hands.Hands(max_num_hands=1,
         if results.multi_hand_landmarks:
             main_indexes = [0, 4, 5, 12, 20]
 
-            landmark_style = mp_drawing.DrawingSpec(color=(255, 1, 255),
+            landmark_style = mp_drawing.DrawingSpec(color=(255, 1, 255), #Points
                                                     thickness=4,
                                                     circle_radius=4)
-            connection_style = mp_drawing.DrawingSpec(color=(15, 219, 19),
+            connection_style = mp_drawing.DrawingSpec(color=(15, 219, 19), #Edges
                                                       thickness=4,
                                                       circle_radius=2)
             
@@ -73,7 +73,7 @@ with mp_hands.Hands(max_num_hands=1,
                         cv2.circle(img=image,
                                    center=(x, y),
                                    radius=5,
-                                   color=(1, 12, 255),
+                                   color=(1, 12, 255), #Main Points
                                    thickness=6)
         
         #  Other operations, capturing the current moment
