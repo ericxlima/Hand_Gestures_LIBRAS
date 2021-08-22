@@ -1,4 +1,5 @@
 #  Import all dependences for this project
+from capture_landmarks import capture_landmarks
 import mediapipe as mp
 import cv2
 
@@ -6,8 +7,6 @@ import cv2
 from comunicate import classify
 from comunicate import train
 
-#  Time for request
-from time import sleep
 
 #  Utilities for Hands and Draw
 mp_drawing = mp.solutions.drawing_utils
@@ -81,61 +80,25 @@ with mp_hands.Hands(max_num_hands=1,
                                    color=(1, 12, 255), #Main Points
                                    thickness=6)
 
+        ##------------------------------------##
+        #  Capture landmarks and make request  #
+        ##------------------------------------##
+
         #  Other operations, capturing the current moment
-        if key == ord(' '):
-
-            #  Pause Video or sleeping
-            cv2.waitKey(-1)
-            
-            #  Captured Hands
-            cap_hands = results.multi_hand_landmarks
-            
-            if not cap_hands:
-                print('No identified hand')
-            else:
-                """ We will use only this five dots for mapping
-                0  - WRIST                  |  12  - MIDDLE_FINGER_TIP
-                4  - THUMB_TIP              |  20 - PINKY_TIP
-                5  - INDEX_FINGER_MCP
-                For add more landmarks, see the MediaPipe documentation
-                """
-
-                landmarks = dict()
-
-                landmarks['WRIST'] = cap_hands[0].landmark[mp_hands.HandLandmark.WRIST]
-                landmarks['THUMB_TIP'] = cap_hands[0].landmark[mp_hands.HandLandmark.THUMB_TIP]
-                landmarks['INDEX_FINGER_MCP'] = cap_hands[0].landmark[mp_hands.HandLandmark.INDEX_FINGER_MCP]
-                landmarks['MIDDLE_FINGER_TIP'] = cap_hands[0].landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP]
-                landmarks['PINKY_TIP'] = cap_hands[0].landmark[mp_hands.HandLandmark.PINKY_TIP]
-
-                #  Remove axis-z and transforme landmarks to { landmark_name: (axis_x, axis_y) }
-                landmarks = { k: (v.x * WIDTH, v.y * HEIGHT) for k, v in landmarks.items() }
-                
-
-                #----------------------------#
-                #   Requests for ML 4 Kids   #
-                #----------------------------#
-                result_request = 'Abracadabra'
-
-                #  Classify
-                if key in [ord('C'), ord('c')]:
-                    result_request = classify(landmarks)
-
-                #  Add in Train Database 
-                if key in [ord('A'), ord('a')]:
-                    result_request = train(landmarks, 'A')
-                if key in [ord('E'), ord('e')]:
-                    result_request = train(landmarks, 'E')
-                if key in [ord('I'), ord('i')]:
-                    result_request = train(landmarks, 'I')
-                if key in [ord('O'), ord('o')]:
-                    result_request = train(landmarks, 'O')
-                if key in [ord('U'), ord('u')]:
-                    result_request = train(landmarks, 'U')
-     
-                print(result_request)
-                sleep(3)
-                
+        if key in [ord(' '), ord('C'), ord('c')]:
+            landmarks = capture_landmarks(cap_hands=results.multi_hand_landmarks,
+                                          width=WIDTH, 
+                                          height=HEIGHT)
+            result_request = classify(data=landmarks)
+            print(result_request)
+        
+        #  For database train
+        if key in [ord('A'), ord('a')]:
+            landmarks = capture_landmarks(cap_hands=results.multi_hand_landmarks,
+                                          width=WIDTH, 
+                                          height=HEIGHT)
+            result_request = train(data=landmarks,
+                                   label='A')
 
         #  Show in the Screen
         cv2.imshow('Hand Gestures LIBRAS', image)
