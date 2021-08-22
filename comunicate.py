@@ -22,7 +22,7 @@ def classify(data:dict):
         class_name = response["class_name"]
         confidence = response["confidence"]
         response = (class_name, confidence)
-        print(response)
+        return response
     else:
         return response.json
 
@@ -39,19 +39,3 @@ def train(data:dict, label:str):
         return f"Training completed. Gesture added to the label {label}"
     else:
         return response.json
-
-
-test_dict = {'WRIST': (421.23828887939453, 363.38579177856445), 
-'THUMB_TIP': (286.0758590698242, 314.8554039001465), 
-'INDEX_FINGER_MCP': (366.2337875366211, 265.72248458862305), 
-'MIDDLE_FINGER_TIP': (372.7992630004883, 151.32914543151855), 
-'PINKY_TIP': (493.5120391845703, 193.50062370300293)}
-
-
-"""train(test_dict, "A")
-train(test_dict, "E")
-train(test_dict, "I")
-train(test_dict, "O")
-train(test_dict, "U")"""
-
-classify(test_dict)

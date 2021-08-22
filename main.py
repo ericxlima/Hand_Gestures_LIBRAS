@@ -2,8 +2,12 @@
 import mediapipe as mp
 import cv2
 
+#  Import functions for API requests
+from comunicate import classify
+from comunicate import train
+
 #  Time for request
-#from time import sleep
+from time import sleep
 
 #  Utilities for Hands and Draw
 mp_drawing = mp.solutions.drawing_utils
@@ -21,7 +25,6 @@ with mp_hands.Hands(max_num_hands=1,
         
         #  Response and Frame of the Webcam 
         success, frame = webcam.read()
-        HEIGHT, WIDTH, _ = frame.shape
 
         if not success:
             print("Ignoring empty camera frame.")
@@ -48,6 +51,8 @@ with mp_hands.Hands(max_num_hands=1,
         if key in [ord('q'), ord('Q')]:
             break
         
+        HEIGHT, WIDTH, _ = image.shape
+
         #  Rendering Results in Screen
         if results.multi_hand_landmarks:
             main_indexes = [0, 4, 5, 12, 20]
@@ -75,13 +80,12 @@ with mp_hands.Hands(max_num_hands=1,
                                    radius=5,
                                    color=(1, 12, 255), #Main Points
                                    thickness=6)
-        
+
         #  Other operations, capturing the current moment
         if key == ord(' '):
 
             #  Pause Video or sleeping
             cv2.waitKey(-1)
-            #  sleep(3)
             
             #  Captured Hands
             cap_hands = results.multi_hand_landmarks
@@ -107,15 +111,15 @@ with mp_hands.Hands(max_num_hands=1,
                 #  Remove axis-z and transforme landmarks to { landmark_name: (axis_x, axis_y) }
                 landmarks = { k: (v.x * WIDTH, v.y * HEIGHT) for k, v in landmarks.items() }
                 
-                #  Add training examples  #  To Do
+                #  Recognize numbers  # 
+                classify_numbers = classify(landmarks)
+                print(classify_numbers)
+
+                #  Add training examples  #
                 store_numbers = None
+     
+                sleep(3)
 
-                #  Recognize numbers  #  To Do
-                classify_numbers = None
-
-                #  To Debug
-                print(landmarks)
-        
         #  Show in the Screen
         cv2.imshow('Hand Gestures LIBRAS', image)
 
