@@ -1,4 +1,5 @@
 #  Import all dependences for this project
+from typing import Tuple
 from capture_landmarks import capture_landmarks
 import mediapipe as mp
 import cv2
@@ -19,7 +20,9 @@ webcam = cv2.VideoCapture(0)
 with mp_hands.Hands(max_num_hands=1,
                     min_detection_confidence=0.8, 
                     min_tracking_confidence=0.5) as hands:
-    
+
+    result_request = "No Identified Hand"
+
     while webcam.isOpened():
         
         #  Response and Frame of the Webcam 
@@ -84,14 +87,17 @@ with mp_hands.Hands(max_num_hands=1,
         #  Capture landmarks and make request  #
         ##------------------------------------##
 
-        result_request = "..."
-
         #  Other operations, capturing the current moment
         if key in [ord(' '), ord('C'), ord('c')]:
             landmarks = capture_landmarks(cap_hands=results.multi_hand_landmarks,
                                           width=WIDTH, 
                                           height=HEIGHT)
-            result_request = str(classify(data=landmarks))
+            result_request = classify(data=landmarks)
+
+            if type(result_request) == tuple:
+                result_request = f"Gesture {result_request[0]} With {result_request[1]}% Accurace"
+            else:
+                result_request = str(result_request)
 
         # Train   
         else:   
@@ -104,17 +110,29 @@ with mp_hands.Hands(max_num_hands=1,
                 landmarks = capture_landmarks(cap_hands=results.multi_hand_landmarks,
                                               width=WIDTH, 
                                               height=HEIGHT)
-                result_request = str(train(data=landmarks,
-                                       label=chr(key).upper()))
+                label = chr(key).upper()
+                result_request = train(data=landmarks, label=label)
+                
+                if type(result_request) != str:
+                    result_request = str(result_request)
 
+        #  Print result in screen (border)
         cv2.putText(img=image,
                     text=result_request,
-                    org=(0, 0),
-                    fontFace=cv2.FONT_HERSHEY_COMPLEX_SMALL,
+                    org=(50, 50),
+                    fontFace=cv2.QT_STYLE_NORMAL,
                     fontScale=1,
-                    color=(0, 0, 0))
-
-
+                    color=(255, 255, 255),
+                    thickness=4)
+        
+        #  Print result in screen
+        cv2.putText(img=image,
+                    text=result_request,
+                    org=(50, 50),
+                    fontFace=cv2.QT_STYLE_NORMAL,
+                    fontScale=1,
+                    color=(0, 0, 0),
+                    thickness=2)
 
 
         #  Show in the Screen

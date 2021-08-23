@@ -36,6 +36,6 @@ def train(data:dict, label:str):
                              json={"data": data, "label": label})
 
     if response.ok:
-        return f"Training completed. Gesture added to the label {label}"
+        return f"Training completed.\nGesture added to the label {label}"
     else:
         return response.json
