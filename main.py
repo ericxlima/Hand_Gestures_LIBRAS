@@ -95,7 +95,7 @@ with mp_hands.Hands(max_num_hands=1,
             result_request = classify(data=landmarks)
 
             if type(result_request) == tuple:
-                result_request = f"Gesture {result_request[0]} With {result_request[1]}% Accurace"
+                result_request = f"Gesture {result_request[0]}\nWith {result_request[1]}% Accurace"
             else:
                 result_request = str(result_request)
 
@@ -116,23 +116,27 @@ with mp_hands.Hands(max_num_hands=1,
                 if type(result_request) != str:
                     result_request = str(result_request)
 
-        #  Print result in screen (border)
-        cv2.putText(img=image,
-                    text=result_request,
-                    org=(50, 50),
-                    fontFace=cv2.QT_STYLE_NORMAL,
-                    fontScale=1,
-                    color=(255, 255, 255),
-                    thickness=4)
-        
-        #  Print result in screen
-        cv2.putText(img=image,
-                    text=result_request,
-                    org=(50, 50),
-                    fontFace=cv2.QT_STYLE_NORMAL,
-                    fontScale=1,
-                    color=(0, 0, 0),
-                    thickness=2)
+        for index, line in enumerate(result_request.split("\n")):
+            
+            axis_y = (index + 1) * 50
+
+            #  Print result in screen (border)
+            cv2.putText(img=image,
+                        text=line,
+                        org=(50, axis_y),
+                        fontFace=cv2.QT_STYLE_NORMAL,
+                        fontScale=1,
+                        color=(255, 255, 255),
+                        thickness=4)
+            
+            #  Print result in screen
+            cv2.putText(img=image,
+                        text=line,
+                        org=(50, axis_y),
+                        fontFace=cv2.QT_STYLE_NORMAL,
+                        fontScale=1,
+                        color=(0, 0, 0),
+                        thickness=2)
 
 
         #  Show in the Screen
