@@ -1,11 +1,8 @@
 import mediapipe as mp
-from cv2 import waitKey
 
 mp_hands = mp.solutions.hands
 
 def capture_landmarks(cap_hands, width, height) -> dict:
-    #  Pause Video or sleeping
-    waitKey(-1)
     
     if not cap_hands:
         return 'No identified hand'

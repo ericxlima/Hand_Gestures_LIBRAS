@@ -91,18 +91,24 @@ with mp_hands.Hands(max_num_hands=1,
                                           height=HEIGHT)
             result_request = classify(data=landmarks)
             print(result_request)
-        
-        #  For database train
-        if key in [ord('A'), ord('a')]:
-            landmarks = capture_landmarks(cap_hands=results.multi_hand_landmarks,
-                                          width=WIDTH, 
-                                          height=HEIGHT)
-            result_request = train(data=landmarks,
-                                   label='A')
+
+        # Train   
+        else:
+            
+            vowels = [ord("a"), ord("A"), ord("e"), ord("E"), ord("i"), 
+                    ord("I"), ord("o"), ord("O"), ord("u"), ord("U")]
+
+            #  For database train
+            if key in vowels:
+
+                landmarks = capture_landmarks(cap_hands=results.multi_hand_landmarks,
+                                            width=WIDTH, 
+                                            height=HEIGHT)
+                result_request = train(data=landmarks,
+                                    label=chr(key).upper())
 
         #  Show in the Screen
         cv2.imshow('Hand Gestures LIBRAS', image)
-
 
 webcam.release()
 cv2.destroyAllWindows()
