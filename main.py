@@ -84,28 +84,38 @@ with mp_hands.Hands(max_num_hands=1,
         #  Capture landmarks and make request  #
         ##------------------------------------##
 
+        result_request = "..."
+
         #  Other operations, capturing the current moment
         if key in [ord(' '), ord('C'), ord('c')]:
             landmarks = capture_landmarks(cap_hands=results.multi_hand_landmarks,
                                           width=WIDTH, 
                                           height=HEIGHT)
-            result_request = classify(data=landmarks)
-            print(result_request)
+            result_request = str(classify(data=landmarks))
 
         # Train   
-        else:
-            
+        else:   
             vowels = [ord("a"), ord("A"), ord("e"), ord("E"), ord("i"), 
-                    ord("I"), ord("o"), ord("O"), ord("u"), ord("U")]
+                      ord("I"), ord("o"), ord("O"), ord("u"), ord("U")]
 
             #  For database train
             if key in vowels:
 
                 landmarks = capture_landmarks(cap_hands=results.multi_hand_landmarks,
-                                            width=WIDTH, 
-                                            height=HEIGHT)
-                result_request = train(data=landmarks,
-                                    label=chr(key).upper())
+                                              width=WIDTH, 
+                                              height=HEIGHT)
+                result_request = str(train(data=landmarks,
+                                       label=chr(key).upper()))
+
+        cv2.putText(img=image,
+                    text=result_request,
+                    org=(0, 0),
+                    fontFace=cv2.FONT_HERSHEY_COMPLEX_SMALL,
+                    fontScale=1,
+                    color=(0, 0, 0))
+
+
+
 
         #  Show in the Screen
         cv2.imshow('Hand Gestures LIBRAS', image)
