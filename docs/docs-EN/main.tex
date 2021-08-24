@@ -50,7 +50,6 @@
 \end{titlepage}
 
 
-
 %  [https://www.cin.ufpe.br/~if668/#]
 %  [https://www.cin.ufpe.br/~evl/]
 %  [Michel Web Site link, men]
@@ -87,9 +86,6 @@ With that, we decided to develop an application that uses Machine Learning capab
 
 %  Image: http://www.dfe.uem.br/comunicauem/2018/10/03/inclusao-e-acessibilidade-dos-deficientes-auditivos/
 
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Tools Used}
 
@@ -108,8 +104,6 @@ For this experiment, the programming language Python [X] was used together with 
 %  https://opencv.org/
 %  https://machinelearningforkids.co.uk/
 %  https://www.ibm.com/watson
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -137,10 +131,6 @@ Also, it was decided to judge only the vowels and not the entire alphabet in LIB
 Following the vertex naming adopted by Mediapipe, the chosen vertices were: 0-wrist, 4-thumb-tip, 5-index-finger-mcp, 12-middle-finger-tip and 20-pinky-tip. With that, the elaboration of the project code was started, and it was divided into 3 parts:
 
 
-
-
-
-
 \newpage
 \subsection{Data Collect:}
 This first part of the project was to use the mentioned libraries to collect the data and treat. The OpenCV was then used to recognize a camera and perform some image settings. Then, we use some solutions present in Mediapipe, to detect and recognize hands, in addition to printing them on the screen. MediaPipe treats the hand with 21 vertices, so we treat these vertices to only take 5 of them and eject the z-axis as it is not needed for the project.
@@ -155,11 +145,6 @@ Finally, it was possible to collect, through keys pressed on the keyboard, the x
 \end{figure}
 
 
-
-
-
-
-
 \subsection{Populate Training Database:}
 To communicate with Machine Learning for Kids, we use its API, in which it is possible to request the classification of data and also request the filling of the training database, and integrate it into the project through the Python Request library [X]. For this, another module responsible for making this communication, was created in addition to generating an API access key directly in Machine Learning for Kids, as well as performing other configurations, such as creating labels for the vowels that will be filled.
 
@@ -171,8 +156,6 @@ To communicate with Machine Learning for Kids, we use its API, in which it is po
 \end{figure}
 
 %  https://docs.python-requests.org/en/master/
-
-
 
 
 \subsection{Training the IA:}
@@ -204,15 +187,15 @@ During the analysis of the results, which took place on 8/21/2021, Machine Learn
     \hline
     Gesture & Tests Done & Corrects & Wrongs & Hit Average \\
     \hline
-    A & 20 & 12 & 8 & X\% \\ 
+    A & 20 & 12 & 8 & 60\% \\ 
     \hline
-    E & 20 & 15 & 5 & X\% \\
+    E & 20 & 15 & 5 & 75\% \\
     \hline
-    I & 20 & 18 & 2 & X\% \\
+    I & 20 & 18 & 2 & 80\% \\
     \hline
-    O & 20 & 12 & 8 & X\% \\
+    O & 20 & 12 & 8 & 60\% \\
     \hline
-    U & 20 & 17 & 3 & X\% \\
+    U & 20 & 17 & 3 & 85\% \\
     \hline
     \end{tabular}
     \caption{Results Analysis}
@@ -229,15 +212,15 @@ It was noticed that the highest error rate was with vowels A and O, a possible j
     \hline
     Gesture & Tests Done & Corrects & Wrongs & Hit Average \\
     \hline
-    A & 30 & 28 & 2 & X\% \\ 
+    A & 30 & 28 & 2 & 93.3\% \\ 
     \hline
-    E & 30 & 29 & 1 & X\% \\
+    E & 30 & 29 & 1 & 96.6\% \\
     \hline
-    I & 30 & 30 & 0 & X\% \\
+    I & 30 & 30 & 0 & 100\% \\
     \hline
-    O & 30 & 29 & 1 & X\% \\
+    O & 30 & 29 & 1 & 96.6\% \\
     \hline
-    U & 30 & 30 & 0 & X\% \\
+    U & 30 & 30 & 0 & 100\% \\
     \hline
     \end{tabular}
     \caption{New Results Analysis}
@@ -250,19 +233,15 @@ With these more accurate results and with a percentage of correct answers above 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
 
-This application proved to be effective in judging whether gestures made with one hand obey a vowel pattern from the Brazilian Sign Language with an average precision of X\% per gesture.
+Learning signs using the Brazilian Sign Language will continue to be a challenge not only for hearing impaired people, but also for the entire population. However, applications like this one, which are in the public domain, can serve not only to learn more about the subject, but also to inspire other applications.
 
-
+The application has already shown itself capable of fulfilling its initial function - recognizing vowels made with manual gestures by LIBRAS -. It uses Machine Learning and, therefore, learns with each interaction, which makes it increasingly intelligent. It can be used in the area of education, both in the use of the application itself, as for teaching, LIBRAS or for teaching subjects related to Machine Learning, it can also be improved by adding another machine learning model, or adding more vertices, even even doing it in another programming language making it more accessible to other audiences.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%  Here we will put the References ...
+\newpage
 \section{References}
-
-...
-
-%[1] ...
-
-%[2] ...
 
 \end{document}
