@@ -70,7 +70,7 @@
 
 After an introductory class on Machine Learning given by Professor Adriano L. I. Oliveira [X], a project was requested with the general objective of applying this knowledge of Artificial Intelligence in practice. Building a program that involved machine learning with models based on Text, Images, Numbers or Sounds, applicable to any real or non-real situation.
 
-The Brazilian Sign Language - LIBRAS - is considered official in the country since 2005 [X], but even with more than 10 million hearing impaired people [X], it is still not taught in public schools, making this language learning even more difficult and, consequently, the communication with a hearing impaired.
+The Brazilian Sign Language - LIBRAS - is considered official in the country since 2005 [X], but even with more than 9 million hearing impaired people [X], it is still not taught in public schools, making this language learning even more difficult and, consequently, the communication with a hearing impaired.
 
 With that, we decided to develop an application that uses Machine Learning capable of judging with precision if the gesture made with the hand is or not a vowel of the Brazilian Sign Language, through a webcam.
 
@@ -151,7 +151,7 @@ Finally, it was possible to collect, through keys pressed on the keyboard, the x
 \centering
 \includegraphics[scale=0.5]{img/data_collect.png}
 \caption{Collecting Data}
-\label{figure_6}
+\label{figure_5}
 \end{figure}
 
 
@@ -167,7 +167,7 @@ To communicate with Machine Learning for Kids, we use its API, in which it is po
 \centering
 \includegraphics[scale=0.5]{img/api_diagram.png}
 \caption{API Diagram}
-\label{figure_5}
+\label{figure_6}
 \end{figure}
 
 %  https://docs.python-requests.org/en/master/
@@ -176,41 +176,75 @@ To communicate with Machine Learning for Kids, we use its API, in which it is po
 
 
 \subsection{Training the IA:}
-All computer training is performed by Watson [X], who uses Convolutional Neural Network and linear regression models for classification. Thus, 40 gestures were added for each vowel, made by different people, with right and left hands and on different webcams, to generate greater precision in the results.
+All computer training is performed by Watson [X], who uses Convolutional Neural Network and linear regression models for classification. Thus, 50 gestures were initially added for each vowel, made by different people, with the right and left hands and on different webcams, to generate greater precision in the results.
 
-%  Show some images for this
+ \begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.5]{img/training_diagram.png}
+\caption{Training Diagram}
+\label{figure_7}
+\end{figure}
 
+The data entry process for the training database has been automated, now being done by pressing a keyboard key, specific for each vowel gesture.
+To facilitate the visualization of the main vertices, it was decided to highlight these points in the webcam window. It was also decided to print in this window a text with the return of the request made.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results Analysis}
 
 
 
-During the analysis of the results, which took place on 8/22/2021, Machine Learning For Kids had problems to return the confidence percentage, always showing 100\% confidence in all tests performed (correct and wrong). Therefore, to verify the real confidence of this judge, the general average of hits and errors was used, and the following data were collected:
+During the analysis of the results, which took place on 8/21/2021, Machine Learning For Kids had problems to return the confidence percentage, always showing 100\% confidence in all tests performed (correct and wrong). Therefore, to verify the real confidence of this judge, the general average was used, through the number of hits and errors collected for each vowel. So, the following data were collected:
 
 
 \begin{table}[h!]
     \centering
     \begin{tabular}{ |c|c|c|c|c| } 
     \hline
-    \multicolumn{5}{|c|}{Results Analysis - 08/22/2021} \\
+    \multicolumn{5}{|c|}{Results Analysis - 08/21/2021} \\
     \hline
-    Gesture & Tests Done & Hits & Failures & Hit Average \\
+    Gesture & Tests Done & Corrects & Wrongs & Hit Average \\
     \hline
-    A & X & X & X & X\% \\ 
+    A & 20 & 12 & 8 & X\% \\ 
     \hline
-    E & X & X & X & X\% \\
+    E & 20 & 15 & 5 & X\% \\
     \hline
-    I & X & X & X & X\% \\
+    I & 20 & 18 & 2 & X\% \\
     \hline
-    O & X & X & X & X\% \\
+    O & 20 & 12 & 8 & X\% \\
     \hline
-    U & X & X & X & X\% \\
+    U & 20 & 17 & 3 & X\% \\
     \hline
     \end{tabular}
     \caption{Results Analysis}
     \label{tab:results_analysis}
 \end{table}
+
+It was noticed that the highest error rate was with vowels A and O, a possible justification is that, graphically, the location of the points is similar. In addition, the errors in the other vowels occurred mainly when the hand was at a distance greater than 1 meter from the webcam. Therefore, 50 more gestures were added to the training database (totaling 100 cases of examples per vowel), and new results were obtained:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{ |c|c|c|c|c| } 
+    \hline
+    \multicolumn{5}{|c|}{New Results Analysis - 08/22/2021} \\
+    \hline
+    Gesture & Tests Done & Corrects & Wrongs & Hit Average \\
+    \hline
+    A & 30 & 28 & 2 & X\% \\ 
+    \hline
+    E & 30 & 29 & 1 & X\% \\
+    \hline
+    I & 30 & 30 & 0 & X\% \\
+    \hline
+    O & 30 & 29 & 1 & X\% \\
+    \hline
+    U & 30 & 30 & 0 & X\% \\
+    \hline
+    \end{tabular}
+    \caption{New Results Analysis}
+    \label{tab:results_analysis2}
+\end{table}
+
+With these more accurate results and with a percentage of correct answers above 90\%, it is concluded that this application has high reliability in judging vowels by the Brazilian Sign Language made by hand.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
