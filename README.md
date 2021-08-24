@@ -3,7 +3,7 @@
 ## An application that uses Machine Learning capable of judging with precision if the gesture made with the hand is ornot a vowel of the Brazilian Sign Language, through a webcam.
 
 #
-###  Demostration 🤌
+###  Demostration :vulcan_salute:
 <img src="media/demostration.gif" width="600px;" alt="Eric"/>
 
 #

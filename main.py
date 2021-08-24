@@ -1,12 +1,11 @@
 #  Import all dependences for this project
-from typing import Tuple
-from capture_landmarks import capture_landmarks
 import mediapipe as mp
 import cv2
 
 #  Import functions for API requests
-from comunicate import classify
-from comunicate import train
+from scripts.capture_landmarks import capture_landmarks
+from scripts.comunicate import classify
+from scripts.comunicate import train
 
 
 #  Utilities for Hands and Draw
