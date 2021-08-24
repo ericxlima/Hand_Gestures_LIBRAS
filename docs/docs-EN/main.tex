@@ -1,11 +1,14 @@
 \documentclass[a4paper, 12pt]{article}
 
-%\usepackage[portuges]{babel}  for portuguese translate some Contents
+\usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{indentfirst}
 \usepackage{graphicx}
 \usepackage[colorinlistoftodos]{todonotes}
+\usepackage{natbib}
+\usepackage{xcolor}
+
 
 \begin{document}
 
@@ -27,16 +30,16 @@
         
 		\textbf{\LARGE{Machine Learning for Hand Gesture Recognition Applied to LIBRAS (Brazilian Sign Language)}}\\
 		\vspace{35pt}
-		\large{Discipline: Introduction to Computing - IF668[X]}
+		\large{Discipline: Introduction to Computing - IF668\cite{course}}
 		\vspace{80pt}
 		
 	\end{center}
 	
 	\begin{flushleft}
 		\begin{tabbing}
-			Students\qquad\qquad\= Eric Vinícius de Lima[X]\\
-			\>Michel Leonidas Aleixo da Silva[X]\\
-			Professor\> Adriano Lorena Inacio de Oliveira[X] \\
+			Students\qquad\qquad\= Eric Vinícius de Lima\cite{eric}\\
+			\>Michel Leonidas Aleixo da Silva\cite{michel}\\
+			Professor\> Adriano Lorena Inacio de Oliveira\cite{adriano} \\
 			Time\> Tuesday - 10:00-12:00 AM\\
 		
 	\end{tabbing}
@@ -48,12 +51,6 @@
 		Recife, October 24, 2021
 	\end{center}
 \end{titlepage}
-
-
-%  [https://www.cin.ufpe.br/~if668/#]
-%  [https://www.cin.ufpe.br/~evl/]
-%  [Michel Web Site link, men]
-%  [http://lattes.cnpq.br/5194381227316437]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
@@ -67,29 +64,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 
-After an introductory class on Machine Learning given by Professor Adriano L. I. Oliveira [X], a project was requested with the general objective of applying this knowledge of Artificial Intelligence in practice. Building a program that involved machine learning with models based on Text, Images, Numbers or Sounds, applicable to any real or non-real situation.
+After an introductory class on Machine Learning given by Professor Adriano L. I. Oliveira, a project was requested with the general objective of applying this knowledge of Artificial Intelligence in practice. Building a program that involved machine learning with models based on Text, Images, Numbers or Sounds, applicable to any real or non-real situation.
 
-The Brazilian Sign Language - LIBRAS - is considered official in the country since 2005 [X], but even with more than 9 million hearing impaired people [X], it is still not taught in public schools, making this language learning even more difficult and, consequently, the communication with a hearing impaired.
+The Brazilian Sign Language - LIBRAS - is considered official in the country since 2005\cite{planalto}, but even with more than 9 million hearing impaired people (2010)\cite{ibge}, it is still not taught in public schools, making this language learning even more difficult and, consequently, the communication with a hearing impaired.
 
 With that, we decided to develop an application that uses Machine Learning capable of judging with precision if the gesture made with the hand is or not a vowel of the Brazilian Sign Language, through a webcam.
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=0.2]{img/inclusion.png}
-\caption{Inclusion and accessibility of hearing impaired [X]}
+\caption{Inclusion and accessibility of hearing impaired\cite{figure_1}}
 \label{figure_1}
 \end{figure}
 
-%  [http://lattes.cnpq.br/5194381227316437]
-%  [http://www.planalto.gov.br/ccivil_03/_ato2004-2006/2005/decreto/d5626.htm]
-%  [https://www.ibge.gov.br/apps/snig/v1/?loc=0&cat=-1,-2,-3,128&ind=4643]
-
-%  Image: http://www.dfe.uem.br/comunicauem/2018/10/03/inclusao-e-acessibilidade-dos-deficientes-auditivos/
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Tools Used}
 
-For this experiment, the programming language Python [X] was used together with the Mediapipe[X] and OpenCV[X] frameworks, in addition to the Machine Learning for Kids [X] platform for processing the results with the Watson Assistant from IBM[X].
+For this experiment, the programming language Python\cite{python} was used together with the Mediapipe\cite{mediapipe} and OpenCV\cite{opencv} frameworks, in addition to the Machine Learning for Kids\cite{ml4kids} platform for processing the results with the Watson Assistant from IBM\cite{watson}.
 
 \begin{figure}[!ht]
 \centering
@@ -97,13 +89,6 @@ For this experiment, the programming language Python [X] was used together with 
 \caption{Tools used in this project}
 \label{figure_2}
 \end{figure}
-
-
-%  https://www.python.org/
-%  https://mediapipe.dev/
-%  https://opencv.org/
-%  https://machinelearningforkids.co.uk/
-%  https://www.ibm.com/watson
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -145,8 +130,9 @@ Finally, it was possible to collect, through keys pressed on the keyboard, the x
 \end{figure}
 
 
+
 \subsection{Populate Training Database:}
-To communicate with Machine Learning for Kids, we use its API, in which it is possible to request the classification of data and also request the filling of the training database, and integrate it into the project through the Python Request library [X]. For this, another module responsible for making this communication, was created in addition to generating an API access key directly in Machine Learning for Kids, as well as performing other configurations, such as creating labels for the vowels that will be filled.
+To communicate with Machine Learning for Kids, we use its API, in which it is possible to request the classification of data and also request the filling of the training database, and integrate it into the project through the Python Request library\cite{requests}. For this, another module responsible for making this communication, was created in addition to generating an API access key directly in Machine Learning for Kids, as well as performing other configurations, such as creating labels for the vowels that will be filled.
 
  \begin{figure}[!ht]
 \centering
@@ -155,13 +141,11 @@ To communicate with Machine Learning for Kids, we use its API, in which it is po
 \label{figure_6}
 \end{figure}
 
-%  https://docs.python-requests.org/en/master/
-
 
 \subsection{Training the IA:}
-All computer training is performed by Watson [X], who uses Convolutional Neural Network and linear regression models for classification. Thus, 50 gestures were initially added for each vowel, made by different people, with the right and left hands and on different webcams, to generate greater precision in the results.
+All computer training is performed by Watson, who uses Convolutional Neural Network and linear regression models for classification. Thus, 50 gestures were initially added for each vowel, made by different people, with the right and left hands and on different webcams, to generate greater precision in the results.
 
- \begin{figure}[!ht]
+\begin{figure}[!ht]
 \centering
 \includegraphics[scale=0.5]{img/training_diagram.png}
 \caption{Training Diagram}
@@ -173,8 +157,6 @@ To facilitate the visualization of the main vertices, it was decided to highligh
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results Analysis}
-
-
 
 During the analysis of the results, which took place on 8/21/2021, Machine Learning For Kids had problems to return the confidence percentage, always showing 100\% confidence in all tests performed (correct and wrong). Therefore, to verify the real confidence of this judge, the general average was used, through the number of hits and errors collected for each vowel. So, the following data were collected:
 
@@ -229,7 +211,6 @@ It was noticed that the highest error rate was with vowels A and O, a possible j
 
 With these more accurate results and with a percentage of correct answers above 90\%, it is concluded that this application has high reliability in judging vowels by the Brazilian Sign Language made by hand.
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
 
@@ -237,11 +218,11 @@ Learning signs using the Brazilian Sign Language will continue to be a challenge
 
 The application has already shown itself capable of fulfilling its initial function - recognizing vowels made with manual gestures by LIBRAS -. It uses Machine Learning and, therefore, learns with each interaction, which makes it increasingly intelligent. It can be used in the area of education, both in the use of the application itself, as for teaching, LIBRAS or for teaching subjects related to Machine Learning, it can also be improved by adding another machine learning model, or adding more vertices, even even doing it in another programming language making it more accessible to other audiences.
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%  Here we will put the References ...
+%  References
 \newpage
-\section{References}
+{\color{white}\section{References}}
+\bibliography{ref.bib}
+\bibliographystyle{plain}
 
 \end{document}
